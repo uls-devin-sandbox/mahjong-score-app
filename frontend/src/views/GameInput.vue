@@ -42,7 +42,7 @@
           </el-col>
           <el-col :span="6">
             <el-form-item label="素点">
-              <el-input-number v-model="result.rawScore" :min="0" :max="100000" />
+              <el-input-number v-model="result.rawScore" :min="0" :max="100000" size="large" />
             </el-form-item>
           </el-col>
           <el-col :span="6">

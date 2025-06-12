@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="co.jp.ulsystems.mahjong.mapper.RuleSettingMapper">
+    
+    <select id="findByRoomId" resultType="RuleSetting">
+        SELECT id, room_id, uma_1st, uma_2nd, uma_3rd, uma_4th, oka, tobi_penalty, created_at, updated_at
+        FROM rule_settings
+        WHERE room_id = #{roomId}
+    </select>
+    
+    <insert id="insert" useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO rule_settings (room_id, uma_1st, uma_2nd, uma_3rd, uma_4th, oka, tobi_penalty, created_at, updated_at)
+        VALUES (#{roomId}, #{uma1st}, #{uma2nd}, #{uma3rd}, #{uma4th}, #{oka}, #{tobiPenalty}, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP)
+    </insert>
+    
+    <update id="update">
+        UPDATE rule_settings
+        SET uma_1st = #{uma1st}, uma_2nd = #{uma2nd}, uma_3rd = #{uma3rd}, uma_4th = #{uma4th}, 
+            oka = #{oka}, tobi_penalty = #{tobiPenalty}, updated_at = CURRENT_TIMESTAMP
+        WHERE room_id = #{roomId}
+    </update>
+    
+    <delete id="delete">
+        DELETE FROM rule_settings WHERE room_id = #{roomId}
+    </delete>
+    
+</mapper>

@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="co.jp.ulsystems.mahjong.mapper.PlayerMapper">
+    
+    <select id="findAll" resultType="Player">
+        SELECT id, name, nickname, created_at, updated_at
+        FROM players
+        ORDER BY name
+    </select>
+    
+    <select id="findById" resultType="Player">
+        SELECT id, name, nickname, created_at, updated_at
+        FROM players
+        WHERE id = #{id}
+    </select>
+    
+    <select id="findByRoomId" resultType="Player">
+        SELECT p.id, p.name, p.nickname, p.created_at, p.updated_at
+        FROM players p
+        INNER JOIN room_players rp ON p.id = rp.player_id
+        WHERE rp.room_id = #{roomId}
+        ORDER BY p.name
+    </select>
+    
+    <insert id="insert" useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO players (name, nickname, created_at, updated_at)
+        VALUES (#{name}, #{nickname}, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP)
+    </insert>
+    
+    <update id="update">
+        UPDATE players
+        SET name = #{name}, nickname = #{nickname}, updated_at = CURRENT_TIMESTAMP
+        WHERE id = #{id}
+    </update>
+    
+    <delete id="delete">
+        DELETE FROM players WHERE id = #{id}
+    </delete>
+    
+    <insert id="addPlayerToRoom">
+        INSERT INTO room_players (room_id, player_id, created_at)
+        VALUES (#{roomId}, #{playerId}, CURRENT_TIMESTAMP)
+        ON CONFLICT (room_id, player_id) DO NOTHING
+    </insert>
+    
+    <delete id="removePlayerFromRoom">
+        DELETE FROM room_players 
+        WHERE room_id = #{roomId} AND player_id = #{playerId}
+    </delete>
+    
+</mapper>

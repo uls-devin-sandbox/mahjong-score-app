@@ -1,0 +1,17 @@
+version: '3.8'
+services:
+  db:
+    image: postgres:15
+    container_name: mahjong_postgres
+    ports:
+      - "5433:5432"
+    environment:
+      POSTGRES_USER: mahjong_user
+      POSTGRES_PASSWORD: mahjong_pass
+      POSTGRES_DB: mahjong_db
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+      - ./backend/src/main/resources/db/migration:/docker-entrypoint-initdb.d
+
+volumes:
+  postgres_data:

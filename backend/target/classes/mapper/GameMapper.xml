@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="co.jp.ulsystems.mahjong.mapper.GameMapper">
+    
+    <select id="findByRoomId" resultType="Game">
+        SELECT id, room_id, game_date, starting_player_id, created_at, updated_at
+        FROM games
+        WHERE room_id = #{roomId}
+        ORDER BY game_date DESC
+    </select>
+    
+    <select id="findById" resultType="Game">
+        SELECT id, room_id, game_date, starting_player_id, created_at, updated_at
+        FROM games
+        WHERE id = #{id}
+    </select>
+    
+    <insert id="insert" useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO games (room_id, game_date, starting_player_id, created_at, updated_at)
+        VALUES (#{roomId}, #{gameDate}, #{startingPlayerId}, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP)
+    </insert>
+    
+    <update id="update">
+        UPDATE games
+        SET room_id = #{roomId}, game_date = #{gameDate}, starting_player_id = #{startingPlayerId}, updated_at = CURRENT_TIMESTAMP
+        WHERE id = #{id}
+    </update>
+    
+    <delete id="delete">
+        DELETE FROM games WHERE id = #{id}
+    </delete>
+    
+</mapper>

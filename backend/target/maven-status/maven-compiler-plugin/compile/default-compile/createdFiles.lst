@@ -1,0 +1,8 @@
+co/jp/ulsystems/mahjong/controller/RuleSettingController.class
+co/jp/ulsystems/mahjong/controller/GameController.class
+co/jp/ulsystems/mahjong/service/RoomService.class
+co/jp/ulsystems/mahjong/service/GameService.class
+co/jp/ulsystems/mahjong/controller/RoomController.class
+co/jp/ulsystems/mahjong/controller/PlayerController.class
+co/jp/ulsystems/mahjong/service/PlayerService.class
+co/jp/ulsystems/mahjong/service/RuleSettingService.class

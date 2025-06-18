@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="co.jp.ulsystems.mahjong.mapper.GameResultMapper">
+    
+    <select id="findByGameId" resultType="GameResult">
+        SELECT id, game_id, player_id, raw_score, rank, is_tobi, final_score, created_at
+        FROM game_results
+        WHERE game_id = #{gameId}
+        ORDER BY rank
+    </select>
+    
+    <select id="findByPlayerId" resultType="GameResult">
+        SELECT id, game_id, player_id, raw_score, rank, is_tobi, final_score, created_at
+        FROM game_results
+        WHERE player_id = #{playerId}
+        ORDER BY created_at DESC
+    </select>
+    
+    <select id="findByRoomId" resultType="GameResult">
+        SELECT gr.id, gr.game_id, gr.player_id, gr.raw_score, gr.rank, gr.is_tobi, gr.final_score, gr.created_at
+        FROM game_results gr
+        INNER JOIN games g ON gr.game_id = g.id
+        WHERE g.room_id = #{roomId}
+        ORDER BY g.game_date DESC, gr.rank
+    </select>
+    
+    <insert id="insert" useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO game_results (game_id, player_id, raw_score, rank, is_tobi, final_score, created_at)
+        VALUES (#{gameId}, #{playerId}, #{rawScore}, #{rank}, #{isTobi}, #{finalScore}, CURRENT_TIMESTAMP)
+    </insert>
+    
+    <update id="update">
+        UPDATE game_results
+        SET raw_score = #{rawScore}, rank = #{rank}, is_tobi = #{isTobi}, final_score = #{finalScore}
+        WHERE id = #{id}
+    </update>
+    
+    <delete id="delete">
+        DELETE FROM game_results WHERE id = #{id}
+    </delete>
+    
+    <delete id="deleteByGameId">
+        DELETE FROM game_results WHERE game_id = #{gameId}
+    </delete>
+    
+</mapper>

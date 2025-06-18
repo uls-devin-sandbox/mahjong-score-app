@@ -2,7 +2,7 @@
   <div class="game-input">
     <h2>対局記録</h2>
     
-    <el-form :model="gameForm" label-width="120px">
+    <el-form :model="gameForm" label-width="150px">
       <el-form-item label="対局日時">
         <el-date-picker
           v-model="gameForm.gameDate"
@@ -10,11 +10,12 @@
           placeholder="対局日時を選択"
           format="YYYY-MM-DD HH:mm"
           value-format="YYYY-MM-DDTHH:mm:ss"
+          style="width: 100%"
         />
       </el-form-item>
       
       <el-form-item label="起家">
-        <el-select v-model="gameForm.startingPlayerId" placeholder="起家を選択">
+        <el-select v-model="gameForm.startingPlayerId" placeholder="起家を選択" style="width: 100%">
           <el-option
             v-for="player in roomPlayers"
             :key="player.id"
@@ -30,7 +31,7 @@
         <el-row :gutter="20">
           <el-col :span="6">
             <el-form-item :label="`プレイヤー${index + 1}`">
-              <el-select v-model="result.playerId" placeholder="プレイヤーを選択">
+              <el-select v-model="result.playerId" placeholder="プレイヤーを選択" style="width: 100%">
                 <el-option
                   v-for="player in roomPlayers"
                   :key="player.id"
@@ -42,7 +43,7 @@
           </el-col>
           <el-col :span="6">
             <el-form-item label="素点">
-              <el-input-number v-model="result.rawScore" :min="0" :max="100000" size="large" />
+              <el-input-number v-model="result.rawScore" :min="0" :max="100000" style="width: 100%" />
             </el-form-item>
           </el-col>
           <el-col :span="6">
@@ -52,7 +53,7 @@
           </el-col>
           <el-col :span="6">
             <el-form-item label="最終得点">
-              <el-input :value="calculateFinalScore(result)" readonly />
+              <el-input :value="calculateFinalScore(result)" readonly style="width: 100%" />
             </el-form-item>
           </el-col>
         </el-row>
@@ -181,7 +182,8 @@ onMounted(async () => {
 <style scoped>
 .game-input {
   padding: 20px;
-  max-width: 800px;
+  max-width: 1200px;
+  margin: 0 auto;
 }
 
 .player-result {

@@ -67,6 +67,22 @@ npm run dev
 - フロントエンド: http://localhost:5173
 - バックエンドAPI: http://localhost:8080/api
 
+## Azureデプロイメント
+
+このアプリケーションはAzure Static Web Appsにデプロイできます。
+
+### 前提条件
+- Azure Static Web Appsリソースの作成
+- GitHubリポジトリとの連携
+
+### 設定
+- Java 17を使用
+- フロントエンドビルド: `npm run build`
+- バックエンドAPI: Spring Boot (Java 17)
+- 設定ファイル: `staticwebapp.config.json`
+
+mainブランチにプッシュすると、GitHub Actionsが自動的にビルドとデプロイを実行します。
+
 ## 画面構成
 - トップページ（部屋一覧）
 - 部屋詳細ページ

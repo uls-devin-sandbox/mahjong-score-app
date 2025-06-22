@@ -81,7 +81,16 @@ npm run dev
 - バックエンドAPI: Spring Boot (Java 17)
 - 設定ファイル: `staticwebapp.config.json`
 
+### GitHub Secrets の設定
+以下のシークレットをGitHubリポジトリに設定する必要があります：
+- `AZURE_STATIC_WEB_APPS_API_TOKEN_AMBITIOUS_MEADOW_0BFC70C00`: Azure Static Web AppsのAPIトークン
+
+### デプロイ
 mainブランチにプッシュすると、GitHub Actionsが自動的にビルドとデプロイを実行します。
+
+### トラブルシューティング
+- **deployment_token エラー**: GitHub SecretsにAzure Static Web Apps APIトークンが正しく設定されているか確認してください
+- **Java バージョンエラー**: Java 17を使用するように設定されているか確認してください
 
 ## 画面構成
 - トップページ（部屋一覧）
